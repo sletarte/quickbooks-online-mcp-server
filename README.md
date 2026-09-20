@@ -186,6 +186,8 @@ Complete CRUD operations are available for all entity types:
 | `get_invoice` | Get invoice by ID |
 | `update_invoice` | Update invoice details |
 | `delete_invoice` | Delete/void an invoice |
+| `send_invoice` | Email an invoice to the customer (BillEmail, cc BillEmailCc). Refuses voided invoices and invoices without a recipient |
+| `void_invoice` | Void an invoice (kept in the books at zero). Refuses paid invoices. Stays available when `delete_*` is disabled |
 | `search_invoices` | Search invoices with filters |
 | `get_invoice_pdf` | Download an invoice as a PDF (inline base64, or to disk when `QBO_PDF_OUTPUT_DIR` is set) |
 
@@ -483,8 +485,8 @@ All tool names must follow the `{verb}_{entity}` convention using underscores. T
 
 | Prefix | Category | Suppressed by |
 |--------|----------|---------------|
-| `create_` | WRITE | `QUICKBOOKS_DISABLE_WRITE=true` |
-| `update_` | UPDATE | `QUICKBOOKS_DISABLE_UPDATE=true` |
+| `create_`, `send_` | WRITE | `QUICKBOOKS_DISABLE_WRITE=true` |
+| `update_`, `void_` | UPDATE | `QUICKBOOKS_DISABLE_UPDATE=true` |
 | `delete_` | DELETE | `QUICKBOOKS_DISABLE_DELETE=true` |
 | `get_`, `search_`, `read_` | READ | never |
 

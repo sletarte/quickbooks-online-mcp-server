@@ -34,6 +34,8 @@ export const PREFIX_CATEGORY_MAP: Record<string, CrudCategory> = {
   "create-": CRUD_CATEGORY.WRITE,
   "update_": CRUD_CATEGORY.UPDATE,
   "update-": CRUD_CATEGORY.UPDATE,
+  "send_":   CRUD_CATEGORY.WRITE,
+  "void_":   CRUD_CATEGORY.UPDATE, // a void is a state change, not a delete: stays available when delete_* is disabled
   "delete_": CRUD_CATEGORY.DELETE,
   "delete-": CRUD_CATEGORY.DELETE,
 };

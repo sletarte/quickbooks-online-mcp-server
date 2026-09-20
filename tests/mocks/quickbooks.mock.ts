@@ -20,6 +20,8 @@ export const mockQuickBooksInstance = {
   deleteInvoice: jest.fn(),
   findInvoices: jest.fn(),
   getInvoicePdf: jest.fn(),
+  sendInvoicePdf: jest.fn(),
+  voidInvoice: jest.fn(),
 
   // Estimate methods
   createEstimate: jest.fn(),
