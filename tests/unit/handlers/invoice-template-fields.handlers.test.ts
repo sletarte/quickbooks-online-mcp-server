@@ -67,4 +67,17 @@ describe('Create Invoice Handler - template fields', () => {
     expect(payload.BillEmail).toBeUndefined();
     expect(payload.Line[0].SalesItemLineDetail.ServiceDate).toBeUndefined();
   });
+
+  it('should map bill_email_cc to BillEmailCc', async () => {
+    mockQuickBooksInstance.createInvoice.mockImplementation((_payload: any, cb: any) => cb(null, { Id: '802' }));
+
+    await createQuickbooksInvoice({
+      customer_ref: '42',
+      line_items: [{ item_ref: '1', qty: 1, unit_price: 100 }],
+      bill_email_cc: 'cc@example.com',
+    });
+
+    const payload = mockQuickBooksInstance.createInvoice.mock.calls[0][0] as any;
+    expect(payload.BillEmailCc).toEqual({ Address: 'cc@example.com' });
+  });
 });

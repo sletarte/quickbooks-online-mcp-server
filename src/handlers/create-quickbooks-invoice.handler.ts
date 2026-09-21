@@ -22,6 +22,7 @@ export interface CreateInvoiceInput {
   customer_memo?: string; // CustomerMemo (customer-facing message)
   sales_term_ref?: string; // SalesTerm id; falls back to customer default
   bill_email?: string; // BillEmail address; falls back to customer default
+  bill_email_cc?: string; // BillEmailCc address, used when the invoice is sent
 }
 
 // Primitive field type map (based on Quickbooks Invoice entity reference docs)
@@ -93,6 +94,7 @@ export async function createQuickbooksInvoice(data: CreateInvoiceInput): Promise
       ...(data.customer_memo && { CustomerMemo: { value: data.customer_memo } }),
       ...(data.sales_term_ref && { SalesTermRef: { value: data.sales_term_ref } }),
       ...(data.bill_email && { BillEmail: { Address: data.bill_email } }),
+      ...(data.bill_email_cc && { BillEmailCc: { Address: data.bill_email_cc } }),
     };
 
     if (data.global_tax_calculation) {

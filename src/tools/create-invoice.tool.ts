@@ -54,6 +54,11 @@ const toolSchema = z.object({
     .min(1)
     .optional()
     .describe("Billing email address (QBO BillEmail). Falls back to the customer default if omitted"),
+  bill_email_cc: z
+    .string()
+    .email()
+    .optional()
+    .describe("Cc email address used when the invoice is sent (QBO BillEmailCc)"),
 });
 
 const toolHandler = async ({ params }: any) => {
